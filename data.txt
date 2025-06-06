@@ -18,6 +18,28 @@ As assinaturas e gráficos de canal da Apple descritos nestas diretrizes são pa
 ####END INTRODUÇÃO####
 
 
+####BEGIN CORES######
+
+A Sobriedade do Preto, Branco e Cinza Define a Identidade de Marca da Apple
+A identidade de marca da Apple é reconhecida globalmente por sua estética minimalista e sofisticada, ancorada em uma paleta de cores primárias de preto, branco e cinza (ou prateado). Essa escolha cromática reflete os valores fundamentais da empresa de simplicidade, elegância e foco no design de seus produtos.
+
+Embora o icônico logotipo da maçã tenha tido uma fase colorida com o "arco-íris" de 1977 a 1998, a identidade visual da marca evoluiu para uma abordagem monocromática com o retorno de Steve Jobs à empresa. Esta mudança marcou uma nova era para a Apple, com ênfase em produtos de design premium e uma comunicação visual limpa e direta.
+
+Atualmente, as diretrizes oficiais de identidade da Apple para parceiros e revendedores reforçam o uso estrito do logotipo em preto ou branco. Essa simplicidade garante a consistência e o reconhecimento da marca em diversas aplicações.
+
+Apesar da paleta principal ser contida, a Apple emprega uma gama mais ampla de cores de forma estratégica em seus produtos e interfaces de software. O sistema operacional da Apple, por exemplo, utiliza uma variedade de "cores de sistema" para denotar interatividade e hierarquia visual dentro de aplicativos no iOS e macOS. Essas cores, no entanto, são consideradas secundárias e de suporte à experiência do usuário, não fazendo parte da identidade central da marca.
+
+A estratégia de cores da Apple pode ser resumida da seguinte forma:
+
+Cores Primárias da Marca: Preto, branco e tons de cinza/prateado. Essas cores dominam a comunicação corporativa, embalagens e o design físico da maioria de seus produtos.
+Logotipo: Utilizado predominantemente em preto ou branco.
+Cores de Destaque e de Produto: A Apple introduz cores em suas linhas de produtos, como o iPhone e o iMac, para atrair diferentes segmentos de consumidores e criar apelo visual. Essas cores variam a cada lançamento e são uma ferramenta de marketing, mas não alteram a identidade de marca fundamental.
+Cores de Interface: Nos seus sistemas operacionais, a Apple utiliza uma paleta de cores funcional para guiar o usuário, com azuis para links e outras cores para notificações e alertas, garantindo uma experiência de usuário intuitiva.
+Em suma, a identidade de marca da Apple é firmemente estabelecida em sua paleta de cores primárias neutras, que comunicam luxo e simplicidade, enquanto o uso calculado de cores em seus produtos e software serve para aprimorar a experiência do usuário e a atratividade do produto.
+
+####END CORES#####
+
+
 
 
 
