@@ -634,6 +634,7 @@ with tab_briefing:
             campos_briefing['especificos']['acessos'] = criar_campo_selecionavel("Acessos (GA, Meta Ads, etc.):")
             campos_briefing['especificos']['expectativas'] = criar_campo_selecionavel("Expectativas de resultados:")
         
+        
         # Botão para gerar o briefing
         if st.button("🔄 Gerar Briefing Completo", type="primary"):
             with st.spinner('Construindo briefing profissional...'):
@@ -643,7 +644,7 @@ with tab_briefing:
                     
                     # Construir o prompt com todas as informações coletadas
                     prompt_parts = [
-                        f"# BRIEFING {tipo_briefing.upper()} - Coca Cola",
+                        f"# BRIEFING {tipo_briefing.upper()} - Positivo_Tecnologia",
                         f"**Projeto:** {campos_briefing['basicos']['nome_projeto']}",
                         f"**Responsável:** {campos_briefing['basicos']['responsavel']}",
                         f"**Data de Entrega:** {campos_briefing['basicos']['data_entrega']}",
@@ -662,6 +663,53 @@ with tab_briefing:
                     
                     prompt = "\n".join(prompt_parts)
                     resposta = modelo_texto.generate_content(prompt)
+
+                    prompt_design = f"""
+                    Você é um designer que trabalha para a Macfor Marketing digital e você deve gerar conteúdo criativo para o cliente Positivo_Tecnologia.
+    
+                    Crie um manual técnico para designers baseado em:
+                    ###BEGIN BRIEFING###
+                    {resposta}
+                    ###END BRIEFING###
+                    
+                    ###BEGIN DIRETRIZES DE MARCA###
+                    {conteudo}
+                    ###END DIRETRIZES DE MARCA###
+    
+    
+                    Inclua:
+                    1. 🎨 Paleta de cores (códigos HEX/RGB) alinhada à marca
+                    2. 🖼️ Diretrizes de fotografia/ilustração (estilo, composição)
+                    3. ✏️ Tipografia hierárquica (títulos, corpo de texto)
+                    4. 📐 Grid e proporções recomendadas
+                    5. ⚠️ Restrições de uso (o que não fazer)
+                    6. 🖌️ Descrição detalhada da imagem principal sugerida
+                    7. 📱 Adaptações para diferentes formatos (stories, feed, etc.)
+                    """
+                    resposta_design = modelo_texto.generate_content(prompt_design)
+
+                    prompt_copy = f"""
+                    Crie textos para campanha considerando:
+                    ###BEGIN BRIEFING###
+                    {resposta}
+                    ###END BRIEFING###
+                    
+                    ###BEGIN DIRETRIZES DE MARCA###
+                    {conteudo}
+                    ###END DIRETRIZES DE MARCA###
+
+                    ###BEGIN DIRETRIZES DE DESIGN###
+                    {resposta_design}
+                    ###END DIRETRIZES DE DESIGN###
+           
+                    Entregar:
+                    - 📝 Legenda principal (com emojis e quebras de linha)
+                    - 🏷️ 10 hashtags relevantes (mix de marca, tema e trending)
+                    - 🔗 Sugestão de link (se aplicável)
+                    - 📢 CTA adequado ao objetivo
+                    """
+                    resposta_copy = modelo_texto.generate_content(prompt_copy)
+                    
                     
                     # Salvar no MongoDB
                     briefing_data = {
@@ -676,9 +724,59 @@ with tab_briefing:
                         "obervacoes": obs,
                     }
                     collection_briefings.insert_one(briefing_data)
+
+                    resposta_design_apr = modelo_texto.generate_content(
+                    f"""Revise este texto conforme:
+                    ###BEGIN DIRETRIZES DE MARCA###
+                    {conteudo}
+                    ###END DIRETRIZES DE MARCA###
+
+                    ###BEGIN DESIGN A SER ANALISADO###
+                    {resposta_design}
+                    ###END DESIGN A SER ANALISADO###
                     
-                    st.subheader(f"Briefing {tipo_briefing} - {campos_briefing['basicos']['nome_projeto']}")
+                    Formato requerido:
+                    ### Design Ajustado
+                    [versão reformulada]
+                    
+                    ### Alterações Realizadas
+                    - [lista itemizada de modificações]
+                    ### Justificativas
+                    [explicação técnica das mudanças]"""
+                )
+
+                    resposta_apr_copy = modelo_texto.generate_content(
+                    f"""Revise este texto conforme:
+                    ###BEGIN DIRETRIZES DE MARCA###
+                    {conteudo}
+                    ###END DIRETRIZES DE MARCA###
+
+                    ###BEGIN TEXTO A SER ANALISADO###
+                    {resposta_copy}
+                    ###END TEXTO A SER ANALISADO###
+                    
+                    Formato requerido:
+                    ### Texto Ajustado
+                    [versão reformulada]
+                    
+                    ### Alterações Realizadas
+                    - [lista itemizada de modificações]
+                    ### Justificativas
+                    [explicação técnica das mudanças]"""
+                )
+                    st.subheader("Versão Validada")
                     st.markdown(resposta.text)
+                    
+                    st.subheader(f"1. Briefing {tipo_briefing} - {campos_briefing['basicos']['nome_projeto']}")
+                    st.markdown(resposta.text)
+                    st.subheader("2. Ideação de design")
+                    st.markdown(resposta_design.text)
+                    st.subheader("3. Aprovação de Ideação de design")
+                    st.markdown(resposta_design_apr.text)
+                    st.subheader("4. Copywriting")
+                    st.markdown(resposta_copy.text)
+                    st.subheader("5.Aprovação de Copywriting")
+                    st.markdown(resposta_apr_copy.text)
                                 
                     st.download_button(
                         label="📥 Download do Briefing",
