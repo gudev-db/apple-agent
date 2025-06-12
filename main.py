@@ -13,12 +13,12 @@ import requests
 # Configuração inicial
 st.set_page_config(
     layout="wide",
-    page_title="Agente Apple Affiliates",
+    page_title="Agente Coca Cola",
     page_icon="assets/page-icon.png"
 )
 st.image('assets/macLogo.png', width=300)
 
-st.header('Agente Apple Affiliates')
+st.header('Agente Coca Cola')
 st.header(' ')
 
 
@@ -35,7 +35,7 @@ db = client2['arquivos_planejamento']
 collection = db['auto_doc']
 banco = client2["arquivos_planejamento"]
 db_clientes = banco["clientes"]  
-db_briefings = banco["briefings_appl"]  
+db_briefings = banco["briefings_coca"]  
 
 
 # Carrega diretrizes
@@ -43,18 +43,18 @@ with open('data.txt', 'r') as file:
     conteudo = file.read()
 
 tab_chatbot, tab_aprovacao, tab_geracao, tab_briefing, tab_briefing_gerados, tab_resumo = st.tabs([
-    "💬 Chatbot Agente Apple Affiliates", 
+    "💬 Chatbot Agente Coca Cola", 
     "✅ Aprovação de Conteúdo", 
     "✨ Geração de Conteúdo",
-    "📋 Geração de Briefing Apple Affiliates",  
+    "📋 Geração de Briefing Coca Cola",  
     "📋 Briefings Gerados",
     "📝 Resumo de Textos",
 ])
 
 
 with tab_chatbot:  
-    st.header("Chat Virtual Apple Affiliates")
-    st.caption("Pergunte qualquer coisa sobre as diretrizes e informações da Apple Affiliates")
+    st.header("Chat Virtual Coca Cola")
+    st.caption("Pergunte qualquer coisa sobre as diretrizes e informações da Coca Cola")
     
     # Inicializa o histórico de chat na session_state
     if "messages" not in st.session_state:
@@ -74,8 +74,8 @@ with tab_chatbot:
         
         # Prepara o contexto com as diretrizes
         contexto = f"""
-        Você é um assistente virtual especializado na Apple Affiliates
-        Baseie todas as suas respostas nestas diretrizes oficiais da Apple Affiliates
+        Você é um assistente virtual especializado na Coca Cola
+        Baseie todas as suas respostas nestas diretrizes oficiais da Coca Cola
         {conteudo}
 
 
@@ -197,7 +197,7 @@ with tab_geracao:
         if st.button("Gerar Especificações", key="gen_visual"):
             with st.spinner('Criando guia de estilo...'):
                 prompt = f"""
-                Você é um designer que trabalha para a Macfor Marketing digital e você deve gerar conteúdo criativo para o cliente Apple Affiliates.
+                Você é um designer que trabalha para a Macfor Marketing digital e você deve gerar conteúdo criativo para o cliente Coca Cola.
 
                 Crie um manual técnico para designers baseado em:
                 Brief: {campanha_brief}
@@ -255,11 +255,11 @@ st.markdown("""
 
 
 with tab_briefing:
-    st.header("Gerador de Briefing Apple Affiliates")
-    st.caption("Crie briefings completos para diferentes áreas de atuação da Apple Affiliates")
+    st.header("Gerador de Briefing Coca Cola")
+    st.caption("Crie briefings completos para diferentes áreas de atuação da Coca Cola")
     
     # Conexão com MongoDB para briefings
-    db_briefings = client2['briefings_appl']
+    db_briefings = client2['briefings_coca']
     collection_briefings = db_briefings['briefings']
     
     # Tipos de briefing disponíveis organizados por categoria
@@ -370,7 +370,7 @@ with tab_briefing:
                 with open("data.txt", "r") as f:
                     contexto = f.read()
                 
-                prompt = f"Com base no seguinte contexto:\n{contexto}\n\n E o objetivo do briefing {objetivo_geral} \n\nPreencha o campo '{rotulo}' para um briefing do tipo {tipo_briefing} no Apple Affiliates. Retorne APENAS o valor para o campo, sem comentários ou formatação adicional."
+                prompt = f"Com base no seguinte contexto:\n{contexto}\n\n E o objetivo do briefing {objetivo_geral} \n\nPreencha o campo '{rotulo}' para um briefing do tipo {tipo_briefing} no Coca Cola. Retorne APENAS o valor para o campo, sem comentários ou formatação adicional."
                 
                 try:
                     resposta = modelo_texto.generate_content(prompt)
@@ -643,7 +643,7 @@ with tab_briefing:
                     
                     # Construir o prompt com todas as informações coletadas
                     prompt_parts = [
-                        f"# BRIEFING {tipo_briefing.upper()} - Apple Affiliates",
+                        f"# BRIEFING {tipo_briefing.upper()} - Coca Cola",
                         f"**Projeto:** {campos_briefing['basicos']['nome_projeto']}",
                         f"**Responsável:** {campos_briefing['basicos']['responsavel']}",
                         f"**Data de Entrega:** {campos_briefing['basicos']['data_entrega']}",
@@ -695,7 +695,7 @@ with tab_briefing:
         
         # Conexão correta com a coleção (ajuste conforme sua configuração)
         # Se você já tem a conexão configurada em outro lugar, mantenha apenas a linha abaixo
-        collection_briefings = client2.briefings_appl.briefings  # Ajuste aqui
+        collection_briefings = client2.briefings_coca.briefings  # Ajuste aqui
         
         # Filtros
         col_filtro1, col_filtro2 = st.columns(2)
@@ -743,7 +743,7 @@ with tab_briefing:
                             st.rerun()
 with tab_resumo:
     st.header("Resumo de Textos")
-    st.caption("Resuma textos longos mantendo o alinhamento com as diretrizes da Apple Affiliates")
+    st.caption("Resuma textos longos mantendo o alinhamento com as diretrizes da Coca Cola")
     
     # Layout em colunas
     col_original, col_resumo = st.columns(2)
@@ -791,7 +791,7 @@ with tab_resumo:
                         }[nivel_resumo]
                         
                         prompt = f"""
-                        Crie um resumo profissional deste texto para a Apple Affiliates Cooperativa Agroindustrial,
+                        Crie um resumo profissional deste texto para a Coca Cola Cooperativa Agroindustrial,
                         seguindo rigorosamente estas diretrizes da marca:
                         {conteudo}
                         
@@ -800,7 +800,7 @@ with tab_resumo:
                         - {"Inclua os principais pontos em tópicos" if incluir_pontos else "Formato de texto contínuo"}
                         - {"Mantenha a terminologia técnica específica" if manter_terminologia else "Simplifique a linguagem"}
                         - Priorize informações relevantes para o agronegócio
-                        - Mantenha o tom profissional da Apple Affiliates
+                        - Mantenha o tom profissional da Coca Cola
                         - Adapte para o público-alvo da cooperativa
                         
                         Texto para resumir:
@@ -821,14 +821,14 @@ with tab_resumo:
                         st.download_button(
                             "📋 Copiar Resumo",
                             data=resposta.text,
-                            file_name="resumo_Apple Affiliates.txt",
+                            file_name="resumo_Coca Cola.txt",
                             mime="text/plain"
                         )
                         
                     except Exception as e:
                         st.error(f"Erro ao gerar resumo: {str(e)}")
     with tab_briefing_gerados:
-        st.header("📚 Briefings Gerados - Apple Affiliates")
+        st.header("📚 Briefings Gerados - Coca Cola")
         st.markdown("---")
         
         # Container principal com 2 colunas
