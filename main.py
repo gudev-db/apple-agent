@@ -140,7 +140,7 @@ with tab_aprovacao:
     with subtab1:
         uploaded_image = st.file_uploader("Carregue imagem para análise (.jpg, .png)", type=["jpg", "jpeg", "png"], key="img_uploader")
         if uploaded_image:
-            st.image(uploaded_image, use_column_width=True, caption="Pré-visualização")
+            st.image(uploaded_image,  caption="Pré-visualização")
             if st.button("Validar Imagem", key="analyze_img"):
                 with st.spinner('Comparando com diretrizes da marca...'):
                     try:
