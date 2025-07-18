@@ -14,9 +14,9 @@ import requests
 st.set_page_config(
     layout="wide",
     page_title="Agente Coca Cola",
-    page_icon="assets/page-icon.png"
+    
 )
-st.image('assets/macLogo.png', width=300)
+
 
 st.header('Agente Coca Cola')
 st.header(' ')
